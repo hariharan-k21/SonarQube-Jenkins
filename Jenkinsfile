@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/hariharan-k21/SonarQube-Jenkins.git'
+                git branch: 'main', url: 'https://github.com/hariharan-k21/SonarQube-Jenkins.git'
             }
         }
         stage('Build') {
