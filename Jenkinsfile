@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Ensure SonarQube Scanner is defined properly in Jenkins Global Tool Configuration
-                    def scannerHome = tool name: 'SonarQube Scanner for Jenkins', type: 'Tool'
+                    def scannerHome = tool name: 'SonarQube Scanner', type: 'Tool'
                     withSonarQubeEnv('SonarQube') {  // Ensure 'SonarQube' matches the server name in Jenkins config
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
