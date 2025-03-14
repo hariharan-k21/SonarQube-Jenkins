@@ -1,11 +1,11 @@
 pipeline {
     agent any
     tools {
-        jdk 'JDK11'
-        maven 'Maven3'
+        jdk 'JDK11'  // Ensure JDK is properly configured
+        maven 'Maven3'  // Ensure Maven is properly configured
     }
     environment {
-        SONARQUBE = 'SonarQube'
+        SONARQUBE = 'SonarQube'  // You have declared this, but not really needed unless used somewhere
     }
     stages {
         stage('Checkout') {
@@ -21,7 +21,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool 'SonarQube Scanner'
+                    // Ensure SonarQube Scanner is defined properly in Jenkins Global Tool Configuration
+                    def scannerHome = tool name: 'SonarQube Scanner', type: 'ToolType'  // ToolType is optional
                     withSonarQubeEnv('SonarQube') {
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
@@ -30,8 +31,8 @@ pipeline {
         }
         stage('Dependency-Check Analysis') {
             steps {
+                // Ensure Dependency-Check is installed and configured under Global Tool Configuration
                 dependencyCheck odcInstallation: 'MyDependencyCheckInstallation', additionalArguments: '-DdependencyCheck.skip=false'
-
             }
         }
     }
