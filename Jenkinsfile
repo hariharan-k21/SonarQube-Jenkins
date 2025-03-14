@@ -32,7 +32,7 @@ pipeline {
         stage('Dependency-Check Analysis') {
             steps {
                 // Ensure Dependency-Check is installed and configured under Global Tool Configuration
-                dependencyCheck installation: 'MyDependencyCheckInstallation', additionalArguments: '-DdependencyCheck.skip=false'
+                dependencyCheck odcInstallation: 'MyDependencyCheckInstallation', additionalArguments: '-DdependencyCheck.skip=false'
             }
         }
     }
