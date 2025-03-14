@@ -30,7 +30,8 @@ pipeline {
         }
         stage('Dependency-Check Analysis') {
             steps {
-                dependencyCheck additionalArguments: '-DdependencyCheck.skip=false'
+                dependencyCheck odcInstallation: 'MyDependencyCheckInstallation', additionalArguments: '-DdependencyCheck.skip=false'
+
             }
         }
     }
