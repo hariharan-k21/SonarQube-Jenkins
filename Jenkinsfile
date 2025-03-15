@@ -16,10 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '''
-                    export -D org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
-                    mvn clean install
-                '''
+                sh 'mvn clean install'
             }
         }
         stage('SonarQube Analysis') {
@@ -27,7 +24,6 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube') {
                         sh '''
-                            export -D org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
                             docker run --rm \
                             -v $(pwd):/usr/src \
                             sonarsource/sonar-scanner-cli:latest \
@@ -45,10 +41,7 @@ pipeline {
                 script {
                     // Run Dependency-Check analysis with Maven plugin
                     echo 'Running Dependency-Check analysis...'
-                    sh '''
-                        export -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
-                        mvn org.owasp:dependency-check-maven:check
-                    '''
+                    sh 'mvn org.owasp:dependency-check-maven:check'
                 }
             }
         }
