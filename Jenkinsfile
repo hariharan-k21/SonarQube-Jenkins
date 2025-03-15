@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    export -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
+                    export -D org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
                     mvn clean install
                 '''
             }
@@ -27,7 +27,7 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube') {
                         sh '''
-                            export -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
+                            export -D org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400
                             docker run --rm \
                             -v $(pwd):/usr/src \
                             sonarsource/sonar-scanner-cli:latest \
